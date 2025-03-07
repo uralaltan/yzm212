@@ -5,10 +5,6 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-import os
-
-# Ensure images directory exists
-os.makedirs('images', exist_ok=True)
 
 # Load results from both implementations
 try:

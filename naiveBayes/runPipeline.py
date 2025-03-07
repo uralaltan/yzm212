@@ -1,5 +1,4 @@
-#!/usr/bin/env python3
-# RunPipeline.py
+# runPipeline.py
 # Script to run the entire analysis pipeline
 
 import os
@@ -50,13 +49,13 @@ def main():
     os.makedirs('data', exist_ok=True)
 
     # Run scikit-learn implementation
-    run_script('NaiveBayesScikitLearn.py')
+    run_script('naiveBayesScikitLearn.py')
 
     # Run custom implementation
-    run_script('NaiveBayes.py')
+    run_script('naiveBayes.py')
 
     # Run comparison
-    run_script('CompareModels.py')
+    run_script('compareModels.py')
 
     print("\nPipeline completed!")
     print("Check the generated visualizations and the modelComparison.csv file for results.")
