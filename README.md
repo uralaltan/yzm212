@@ -6,6 +6,7 @@
 - [Dataset](#dataset)
 - [Method](#method)
 - [Running the Project](#running-the-project)
+    - [Clone the Repository](#clone-the-repository)
     - [Using a Virtual Environment (Preferred)](#using-a-virtual-environment-preferred-method)
     - [Direct Execution](#direct-execution-alternative-method)
 - [Results](#results)
@@ -67,6 +68,15 @@ characteristics of the cell nuclei present in the image. The features include me
     - Evaluated performance using the same metrics
 
 ## Running the Project
+
+### Clone the Repository
+```bash
+# Clone the repository
+git clone https://github.com/uralaltan/yzm212.git
+
+# Go to Naive Bayes folder
+cd yzm212/naiveBayes
+```
 
 ### Using a Virtual Environment (Preferred Method)
 
