@@ -86,7 +86,7 @@ venv\Scripts\activate
 pip install -r requirements.txt
 
 # Run the pipeline
-python run_pipeline.py
+python runPipeline.py
 
 # Deactivate the virtual environment when done
 deactivate
@@ -105,7 +105,7 @@ source venv/bin/activate
 pip install -r requirements.txt
 
 # Run the pipeline
-python run_pipeline.py
+python runPipeline.py
 
 # Deactivate the virtual environment when done
 deactivate
@@ -120,7 +120,7 @@ If you prefer not to use a virtual environment, you can run the code directly:
 pip install -r requirements.txt
 
 # Run the pipeline
-python run_pipeline.py
+python runPipeline.py
 ```
 
 ## Results
