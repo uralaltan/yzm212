@@ -16,10 +16,7 @@ Bu proje, makine öğrenmesi kapsamında verinin matris temsili, matris manipül
 ### Özdeğer (Eigenvalue) ve Özvektör (Eigenvector)
 - **Özdeğer (Eigenvalue):**  
   Bir matrisin belirli bir doğrultudaki (özvektör) yalnızca skaler katsayı ile çarpılması sonucu ortaya çıkan değerlerdir.  
-  Matematiksel ifade:  
-  \[
-  Av = \lambda v
-  \]
+
 - **Özvektör (Eigenvector):**  
   Matrisin doğrultu değiştirmeden ölçeklenen vektörlerdir.  
   Bu özellik, verinin yapısal özelliklerinin ortaya çıkarılmasında kritik bir rol oynar.
@@ -74,7 +71,7 @@ Bu proje, makine öğrenmesi kapsamında verinin matris temsili, matris manipül
 ## Kaynaklar
 
 - **Makine Öğrenmesinde Matrislerin Kullanımı:**  
-  [Introduction to Matrices in Machine Learning](https://machinelearningmastery.com/introduction-matrices-machine-learning/) (Erişim: 7 Nisan 2025) :contentReference[oaicite:0]{index=0}
+  [Introduction to Matrices in Machine Learning](https://machinelearningmastery.com/introduction-matrices-machine-learning/)
 
 - **Özdeğer Ayrışımı, Özdeğerler ve Özvektörler:**  
-  [Introduction to Eigendecomposition, Eigenvalues and Eigenvectors](https://machinelearningmastery.com/introduction-to-eigendecomposition-eigenvalues-and-eigenvectors/) (Erişim: 7 Nisan 2025) :contentReference[oaicite:1]{index=1}
+  [Introduction to Eigendecomposition, Eigenvalues and Eigenvectors](https://machinelearningmastery.com/introduction-to-eigendecomposition-eigenvalues-and-eigenvectors/)

@@ -35,7 +35,7 @@ Detaylı dokümantasyon bilgisine [buradan](https://numpy.org/doc/2.1/reference/
   - Kaynak kod, girdi doğrulaması, bellek tahsisi ve sonrasında LAPACK çağrısının yapılması adımlarını barındırır.
   - İşlem tamamlandıktan sonra, LAPACK çıktısı, Python’da kullanılabilir NumPy dizilerine dönüştürülür. Bu dönüşüm sırasında hem özdeğerler hem de her özdeğere karşılık gelen özvektörler elde edilir.
   
-Kaynak kodlarını detaylı incelemek için [NumPy Github Linalg dizini](https://github.com/numpy/numpy/tree/main/numpy/linalg) üzerinden erişim sağlanabilir. :contentReference[oaicite:1]{index=1}
+Kaynak kodlarını detaylı incelemek için [NumPy Github Linalg dizini](https://github.com/numpy/numpy/tree/main/numpy/linalg) üzerinden erişim sağlanabilir.
 
 ---
 
@@ -68,5 +68,5 @@ Kaynak kodlarını detaylı incelemek için [NumPy Github Linalg dizini](https:/
 
 ## Kaynaklar
 
-- [NumPy `linalg.eig` Dokümantasyonu](https://numpy.org/doc/2.1/reference/generated/numpy.linalg.eig.html) (Erişim: 7 Nisan 2025) :contentReference[oaicite:2]{index=2}
-- [NumPy Linalg Kaynak Kodları (GitHub)](https://github.com/numpy/numpy/tree/main/numpy/linalg) (Erişim: 7 Nisan 2025) :contentReference[oaicite:3]{index=3}
+- [NumPy `linalg.eig` Dokümantasyonu](https://numpy.org/doc/2.1/reference/generated/numpy.linalg.eig.html)
+- [NumPy Linalg Kaynak Kodları (GitHub)](https://github.com/numpy/numpy/tree/main/numpy/linalg)
