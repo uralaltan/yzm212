@@ -19,7 +19,7 @@ NumPy’nın `linalg.eig` fonksiyonu, karesel (square) bir matrisin özdeğerler
   - Belirli LAPACK (Linear Algebra PACKage) rutinleri kullanılarak, yüksek performanslı ve kararlı nümerik hesaplamalar gerçekleştirilir.
   - Özellikle, dokümantasyonda fonksiyonun kare matrisler için geçerli olduğuna dikkat çekilir; çünkü yalnızca kare matrislerde tanımlı olan özdeğer ayrışımı mümkündür.
 
-Detaylı dokümantasyon bilgisine [buradan](https://numpy.org/doc/2.1/reference/generated/numpy.linalg.eig.html) erişilebilir. :contentReference[oaicite:0]{index=0}
+Detaylı dokümantasyon bilgisine [buradan](https://numpy.org/doc/2.1/reference/generated/numpy.linalg.eig.html) erişilebilir.
 
 ---
 
