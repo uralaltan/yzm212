@@ -18,6 +18,11 @@ This repository contains implementations of various machine learning algorithms 
 │   ├── data
 │   │   └── diabetes.csv
 │   └── README.md
+├── 3.eigenVectorsValues
+│   ├── EigenVectorsValues.ipynb
+│   ├── README1.md.
+│   ├── README2.md.
+│   └── README3.md
 ├── .gitignore
 ├── README.md
 └── requirements.txt
