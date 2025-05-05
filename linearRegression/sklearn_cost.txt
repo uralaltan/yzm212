@@ -1,0 +1,4 @@
+Scikit-Learn Train MSE: 39.76038682967429
+Scikit-Learn Test MSE: 33.51954917268488
+Scikit-Learn Train R²: 0.5423180734793516
+Scikit-Learn Test R²: 0.5429180422970386
