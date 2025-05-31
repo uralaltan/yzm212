@@ -64,6 +64,3 @@ venv.bak/
 *.npy
 *.npz
 *.csv
-*.png
-*.jpg
-*.jpeg
