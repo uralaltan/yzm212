@@ -1,292 +1,292 @@
-# Neural Network Implementation with Forward and Backward Propagation
+# İleri ve Geri Yayılım ile Sinir Ağı Uygulaması
 
-## Abstract
+## Özet
 
-This study presents a from-scratch implementation of a feedforward neural network using forward and backward propagation algorithms for both classification and regression tasks. The implementation includes multiple activation functions (ReLU, Sigmoid, Tanh, Linear, Softmax), gradient-based optimization with mini-batch support, and early stopping mechanisms. Experimental validation was conducted on synthetic datasets, achieving 87% accuracy on binary classification tasks and R² score of 0.9443 on regression problems, demonstrating the effectiveness of the implemented algorithms.
+Bu çalışma, hem sınıflandırma hem de regresyon görevleri için ileri ve geri yayılım algoritmalarını kullanarak sıfırdan bir ileri beslemeli sinir ağı uygulamasını sunmaktadır. Uygulama, çoklu aktivasyon fonksiyonları (ReLU, Sigmoid, Tanh, Doğrusal, Softmax), mini-batch desteği ile gradyan tabanlı optimizasyon ve erken durdurma mekanizmalarını içermektedir. Deneysel doğrulama sentetik veri kümeleri üzerinde gerçekleştirilmiş, ikili sınıflandırma görevlerinde %87 doğruluk ve regresyon problemlerinde 0.9443 R² skoru elde edilmiş, uygulanan algoritmaların etkinliği kanıtlanmıştır.
 
-**Keywords:** Neural Networks, Forward Propagation, Backward Propagation, Gradient Descent, Machine Learning
+**Anahtar Kelimeler:** Sinir Ağları, İleri Yayılım, Geri Yayılım, Gradyan İnişi, Makine Öğrenmesi
 
-## 1. Introduction
+## 1. Giriş
 
-### 1.1 Background
+### 1.1 Arka Plan
 
-Artificial neural networks have become fundamental tools in machine learning, capable of learning complex patterns from data through iterative optimization processes. The core mechanisms underlying neural network training are forward propagation and backward propagation algorithms, which enable the network to learn by adjusting weights and biases based on prediction errors.
+Yapay sinir ağları, iteratif optimizasyon süreçleri aracılığıyla verilerden karmaşık kalıpları öğrenebilen makine öğrenmesinin temel araçları haline gelmiştir. Sinir ağı eğitiminin altında yatan temel mekanizmalar, ağın tahmin hatalarına dayalı olarak ağırlık ve bias değerlerini ayarlayarak öğrenmesini sağlayan ileri yayılım ve geri yayılım algoritmalarıdır.
 
-### 1.2 Motivation
+### 1.2 Motivasyon
 
-While numerous neural network frameworks exist, understanding the fundamental algorithms through implementation provides deeper insights into the mathematical foundations and computational processes. This study implements a neural network from scratch to demonstrate the core principles of forward and backward propagation.
+Çok sayıda sinir ağı çerçevesi mevcut olmasına rağmen, uygulama yoluyla temel algoritmaları anlamak matematiksel temeller ve hesaplama süreçleri hakkında daha derin içgörüler sağlar. Bu çalışma, ileri ve geri yayılımın temel ilkelerini göstermek için sıfırdan bir sinir ağı uygular.
 
-### 1.3 Objectives
+### 1.3 Amaçlar
 
-The primary objectives of this research are:
-- Implement forward propagation for computing activations through network layers
-- Develop backward propagation using the chain rule for gradient computation
-- Support multiple activation functions and loss functions
-- Validate the implementation on classification and regression tasks
-- Demonstrate convergence and performance metrics
+Bu araştırmanın temel amaçları:
+- Ağ katmanları boyunca aktivasyonları hesaplamak için ileri yayılım uygulamak
+- Gradyan hesaplaması için zincir kuralını kullanarak geri yayılım geliştirmek
+- Çoklu aktivasyon fonksiyonları ve kayıp fonksiyonlarını desteklemek
+- Sınıflandırma ve regresyon görevlerinde uygulamayı doğrulamak
+- Yakınsama ve performans metriklerini göstermek
 
-### 1.4 Scope
+### 1.4 Kapsam
 
-This implementation focuses on fully connected feedforward networks with support for:
-- Binary and multi-class classification
-- Regression tasks
-- Multiple activation functions (ReLU, Sigmoid, Tanh, Linear, Softmax)
-- Mini-batch gradient descent optimization
-- Early stopping for regularization
+Bu uygulama aşağıdakileri destekleyen tam bağlantılı ileri beslemeli ağlara odaklanır:
+- İkili ve çok sınıflı sınıflandırma
+- Regresyon görevleri
+- Çoklu aktivasyon fonksiyonları (ReLU, Sigmoid, Tanh, Doğrusal, Softmax)
+- Mini-batch gradyan inişi optimizasyonu
+- Düzenlileştirme için erken durdurma
 
-## 2. Methods
+## 2. Yöntemler
 
-### 2.1 Neural Network Architecture
+### 2.1 Sinir Ağı Mimarisi
 
-The implemented neural network consists of:
-- **Input Layer**: Receives feature vectors
-- **Hidden Layers**: Apply linear transformations followed by activation functions
-- **Output Layer**: Produces predictions using task-specific activation functions
+Uygulanan sinir ağı şunlardan oluşur:
+- **Giriş Katmanı**: Özellik vektörlerini alır
+- **Gizli Katmanlar**: Aktivasyon fonksiyonları ardından doğrusal dönüşümler uygular
+- **Çıkış Katmanı**: Göreve özgü aktivasyon fonksiyonları kullanarak tahminler üretir
 
-### 2.2 Forward Propagation Algorithm
+### 2.2 İleri Yayılım Algoritması
 
-Forward propagation computes activations layer by layer:
+İleri yayılım aktivasyonları katman katman hesaplar:
 
-For each layer l:
+Her l katmanı için:
 ```
 z^[l] = W^[l] · a^[l-1] + b^[l]
 a^[l] = g(z^[l])
 ```
 
-Where:
-- W^[l]: Weight matrix for layer l
-- b^[l]: Bias vector for layer l
-- g(): Activation function
-- a^[0] = X (input features)
+Burada:
+- W^[l]: l katmanı için ağırlık matrisi
+- b^[l]: l katmanı için bias vektörü
+- g(): Aktivasyon fonksiyonu
+- a^[0] = X (giriş özellikleri)
 
-### 2.3 Activation Functions
+### 2.3 Aktivasyon Fonksiyonları
 
-The implementation includes:
+Uygulama şunları içerir:
 
 **ReLU**: f(x) = max(0, x)
-- Used in hidden layers for non-linearity
-- Gradient: f'(x) = 1 if x > 0, else 0
+- Doğrusal olmama için gizli katmanlarda kullanılır
+- Gradyan: f'(x) = x > 0 ise 1, yoksa 0
 
 **Sigmoid**: f(x) = 1/(1 + e^(-x))
-- Used for binary classification output
-- Gradient: f'(x) = f(x)(1 - f(x))
+- İkili sınıflandırma çıkışı için kullanılır
+- Gradyan: f'(x) = f(x)(1 - f(x))
 
 **Tanh**: f(x) = tanh(x)
-- Alternative activation for hidden layers
-- Gradient: f'(x) = 1 - tanh²(x)
+- Gizli katmanlar için alternatif aktivasyon
+- Gradyan: f'(x) = 1 - tanh²(x)
 
 **Softmax**: f(x_i) = e^(x_i) / Σe^(x_j)
-- Used for multi-class classification
-- Provides probability distribution over classes
+- Çok sınıflı sınıflandırma için kullanılır
+- Sınıflar üzerinde olasılık dağılımı sağlar
 
-**Linear**: f(x) = x
-- Used for regression output layers
-- Gradient: f'(x) = 1
+**Doğrusal**: f(x) = x
+- Regresyon çıkış katmanları için kullanılır
+- Gradyan: f'(x) = 1
 
-### 2.4 Backward Propagation Algorithm
+### 2.4 Geri Yayılım Algoritması
 
-Backward propagation computes gradients using the chain rule:
+Geri yayılım zincir kuralı kullanarak gradyanları hesaplar:
 
-**Output Layer Error**:
-- Classification: δ^[L] = a^[L] - y
-- Regression: δ^[L] = a^[L] - y
+**Çıkış Katmanı Hatası**:
+- Sınıflandırma: δ^[L] = a^[L] - y
+- Regresyon: δ^[L] = a^[L] - y
 
-**Hidden Layer Errors**:
+**Gizli Katman Hataları**:
 ```
 δ^[l] = (W^[l+1])^T δ^[l+1] ⊙ g'(z^[l])
 ```
 
-**Weight and Bias Gradients**:
+**Ağırlık ve Bias Gradyanları**:
 ```
 ∂L/∂W^[l] = (1/m) δ^[l] (a^[l-1])^T
 ∂L/∂b^[l] = (1/m) Σδ^[l]
 ```
 
-### 2.5 Loss Functions
+### 2.5 Kayıp Fonksiyonları
 
-**Binary Cross-Entropy** (Classification):
+**İkili Çapraz Entropi** (Sınıflandırma):
 ```
 L = -(1/m) Σ[y log(ŷ) + (1-y) log(1-ŷ)]
 ```
 
-**Categorical Cross-Entropy** (Multi-class):
+**Kategorik Çapraz Entropi** (Çok sınıflı):
 ```
 L = -(1/m) Σ Σ y_ij log(ŷ_ij)
 ```
 
-**Mean Squared Error** (Regression):
+**Ortalama Kare Hata** (Regresyon):
 ```
 L = (1/m) Σ(y - ŷ)²
 ```
 
-### 2.6 Optimization
+### 2.6 Optimizasyon
 
-**Mini-batch Gradient Descent**:
-- Data shuffled at each epoch
-- Weights updated per batch: W = W - α∇W
-- Gradient clipping applied for stability
+**Mini-batch Gradyan İnişi**:
+- Her epoch'ta veriler karıştırılır
+- Ağırlıklar batch başına güncellenir: W = W - α∇W
+- Kararlılık için gradyan kırpma uygulanır
 
-**Weight Initialization**:
-- Xavier initialization for regression: σ = √(2/(n_in + n_out))
-- He initialization for ReLU: σ = √(2/n_in)
+**Ağırlık Başlatma**:
+- Regresyon için Xavier başlatması: σ = √(2/(n_in + n_out))
+- ReLU için He başlatması: σ = √(2/n_in)
 
-**Early Stopping**:
-- Monitor loss on training set
-- Stop training if no improvement for 50 epochs
+**Erken Durdurma**:
+- Eğitim setindeki kaybı izle
+- 50 epoch boyunca iyileşme yoksa eğitimi durdur
 
-### 2.7 Experimental Setup
+### 2.7 Deneysel Kurulum
 
-**Classification Dataset**:
-- 1000 samples, 20 features
-- 15 informative, 5 redundant features
-- Binary classification task
-- Train/test split: 80/20
+**Sınıflandırma Veri Kümesi**:
+- 1000 örnek, 20 özellik
+- 15 bilgilendirici, 5 gereksiz özellik
+- İkili sınıflandırma görevi
+- Eğitim/test bölünmesi: 80/20
 
-**Regression Dataset**:
-- 1000 samples, 10 features
-- 8 informative features
-- Continuous target variable
-- Train/test split: 80/20
+**Regresyon Veri Kümesi**:
+- 1000 örnek, 10 özellik
+- 8 bilgilendirici özellik
+- Sürekli hedef değişken
+- Eğitim/test bölünmesi: 80/20
 
-**Network Architectures**:
-- Classification: [20, 16, 8, 1] with ReLU → Sigmoid
-- Regression: [10, 12, 6, 1] with Tanh → Linear
+**Ağ Mimarileri**:
+- Sınıflandırma: [20, 16, 8, 1] ReLU → Sigmoid ile
+- Regresyon: [10, 12, 6, 1] Tanh → Doğrusal ile
 
-**Training Parameters**:
-- Learning rate: 0.01
-- Epochs: 1000
-- Batch size: Full batch
-- Optimization: Gradient descent with clipping
+**Eğitim Parametreleri**:
+- Öğrenme oranı: 0.01
+- Epoch: 1000
+- Batch boyutu: Tam batch
+- Optimizasyon: Kırpma ile gradyan inişi
 
-## 3. Results
+## 3. Sonuçlar
 
-### 3.1 Classification Performance
+### 3.1 Sınıflandırma Performansı
 
-**Training Progress**:
-- Initial loss: 0.8539
-- Final loss: 0.3335
-- Initial accuracy: 49.88%
-- Final accuracy: 87.12%
+**Eğitim İlerleyişi**:
+- Başlangıç kaybı: 0.8539
+- Son kayıp: 0.3335
+- Başlangıç doğruluğu: %49.88
+- Son doğruluk: %87.12
 
-**Test Performance**:
-- Test accuracy: 87.00%
-- Consistent with training performance, indicating no overfitting
+**Test Performansı**:
+- Test doğruluğu: %87.00
+- Eğitim performansı ile tutarlı, aşırı öğrenme olmadığını gösterir
 
-**Convergence**:
-- Steady loss decrease over 1000 epochs
-- Accuracy improvement: 37+ percentage points
-- Stable training without gradient explosion
+**Yakınsama**:
+- 1000 epoch boyunca istikrarlı kayıp azalması
+- Doğruluk iyileşmesi: 37+ yüzde puanı
+- Gradyan patlaması olmadan kararlı eğitim
 
-### 3.2 Regression Performance
+### 3.2 Regresyon Performansı
 
-**Training Progress**:
-- Initial loss: 1.2302
-- Final loss: 0.0523
-- Rapid convergence within first 200 epochs
+**Eğitim İlerleyişi**:
+- Başlangıç kaybı: 1.2302
+- Son kayıp: 0.0523
+- İlk 200 epoch içinde hızlı yakınsama
 
-**Test Performance**:
+**Test Performansı**:
 - Test MSE: 0.0463
-- Test R² score: 0.9443 (94.43% variance explained)
-- Strong predictive performance
+- Test R² skoru: 0.9443 (varyansın %94.43'ü açıklandı)
+- Güçlü tahmin performansı
 
-### 3.3 Training Dynamics
+### 3.3 Eğitim Dinamikleri
 
-**Loss Convergence**:
-- Classification: Exponential decay pattern
-- Regression: Fast initial drop, then gradual improvement
-- No signs of overfitting in either task
+**Kayıp Yakınsaması**:
+- Sınıflandırma: Üstel azalma modeli
+- Regresyon: Hızlı başlangıç düşüşü, sonra kademeli iyileşme
+- Her iki görevde de aşırı öğrenme belirtisi yok
 
-**Gradient Stability**:
-- Gradient clipping prevented explosion
-- Stable parameter updates throughout training
-- Consistent convergence across multiple runs
+**Gradyan Kararlılığı**:
+- Gradyan kırpma patlamayı önledi
+- Eğitim boyunca kararlı parametre güncellemeleri
+- Çoklu çalıştırmalarda tutarlı yakınsama
 
-### 3.4 Computational Performance
+### 3.4 Hesaplama Performansı
 
-**Memory Efficiency**:
-- Mini-batch support for large datasets
-- Efficient matrix operations using NumPy
-- Reasonable computational complexity
+**Bellek Verimliliği**:
+- Büyük veri kümeleri için mini-batch desteği
+- NumPy kullanarak verimli matris işlemleri
+- Makul hesaplama karmaşıklığı
 
-**Training Time**:
-- Fast convergence for both tasks
-- Early stopping reduced unnecessary computation
-- Suitable for medium-scale problems
+**Eğitim Süresi**:
+- Her iki görev için hızlı yakınsama
+- Erken durdurma gereksiz hesaplamayı azalttı
+- Orta ölçekli problemler için uygun
 
-## 4. Discussion
+## 4. Tartışma
 
-### 4.1 Algorithm Effectiveness
+### 4.1 Algoritma Etkinliği
 
-The implemented neural network successfully demonstrates the fundamental principles of forward and backward propagation. The achieved performance metrics (87% classification accuracy, 94.43% regression R²) validate the correctness of the implementation and effectiveness of the algorithms.
+Uygulanan sinir ağı, ileri ve geri yayılımın temel ilkelerini başarıyla göstermiştir. Elde edilen performans metrikleri (%87 sınıflandırma doğruluğu, %94.43 regresyon R²) uygulamanın doğruluğunu ve algoritmaların etkinliğini doğrular.
 
-### 4.2 Forward Propagation Analysis
+### 4.2 İleri Yayılım Analizi
 
-The forward propagation implementation efficiently computes activations layer by layer, properly handling different activation functions. The modular design allows easy extension to different network architectures and activation functions.
+İleri yayılım uygulaması, farklı aktivasyon fonksiyonlarını düzgün bir şekilde işleyerek aktivasyonları katman katman verimli bir şekilde hesaplar. Modüler tasarım, farklı ağ mimarilerine ve aktivasyon fonksiyonlarına kolay genişleme sağlar.
 
-### 4.3 Backward Propagation Analysis
+### 4.3 Geri Yayılım Analizi
 
-The backward propagation correctly implements the chain rule for gradient computation. The automatic differentiation through the network layers demonstrates proper understanding of the mathematical foundations. Gradient clipping prevents numerical instabilities commonly encountered in deep networks.
+Geri yayılım, gradyan hesaplaması için zincir kuralını doğru bir şekilde uygular. Ağ katmanları boyunca otomatik türev alma, matematiksel temellerin doğru anlaşıldığını gösterir. Gradyan kırpma, derin ağlarda yaygın karşılaşılan sayısal kararsızlıkları önler.
 
-### 4.4 Optimization Performance
+### 4.4 Optimizasyon Performansı
 
-The gradient descent optimization with appropriate learning rates achieves stable convergence. The weight initialization strategies (Xavier/He) contribute to training stability. Early stopping effectively prevents overfitting in regression tasks.
+Uygun öğrenme oranları ile gradyan inişi optimizasyonu kararlı yakınsama sağlar. Ağırlık başlatma stratejileri (Xavier/He) eğitim kararlılığına katkıda bulunur. Erken durdurma, regresyon görevlerinde aşırı öğrenmeyi etkili bir şekilde önler.
 
-### 4.5 Limitations and Considerations
+### 4.5 Sınırlamalar ve Değerlendirmeler
 
-**Scalability**: The current implementation is suitable for small to medium-scale problems. For larger networks, more sophisticated optimizers (Adam, RMSprop) would be beneficial.
+**Ölçeklenebilirlik**: Mevcut uygulama küçük ila orta ölçekli problemler için uygundur. Daha büyük ağlar için daha sofistike optimizerler (Adam, RMSprop) faydalı olacaktır.
 
-**Architecture Constraints**: Limited to fully connected layers. Convolutional or recurrent architectures would require additional implementation.
+**Mimari Kısıtlamaları**: Tam bağlantılı katmanlarla sınırlıdır. Konvolüsyonel veya tekrarlayıcı mimariler ek uygulama gerektirir.
 
-**Regularization**: Currently implements only early stopping. Dropout, L1/L2 regularization could improve generalization.
+**Düzenlileştirme**: Şu anda sadece erken durdurma uygular. Dropout, L1/L2 düzenlileştirme genellemeyi iyileştirebilir.
 
-### 4.6 Practical Applications
+### 4.6 Pratik Uygulamalar
 
-This implementation serves as:
-- Educational tool for understanding neural network fundamentals
-- Baseline for comparing with advanced frameworks
-- Foundation for extending to more complex architectures
-- Demonstration of mathematical concepts in practice
+Bu uygulama şu amaçlarla hizmet eder:
+- Sinir ağı temellerini anlamak için eğitim aracı
+- Gelişmiş çerçevelerle karşılaştırma için temel
+- Daha karmaşık mimarilere genişletme için temel
+- Matematiksel kavramların pratikte gösterimi
 
-### 4.7 Future Improvements
+### 4.7 Gelecek İyileştirmeler
 
-**Optimization Enhancements**:
-- Adaptive learning rate methods
-- Momentum-based optimization
-- Learning rate scheduling
+**Optimizasyon Geliştirmeleri**:
+- Uyarlanabilir öğrenme oranı yöntemleri
+- Momentum tabanlı optimizasyon
+- Öğrenme oranı planlaması
 
-**Regularization Techniques**:
-- Dropout layers
-- Batch normalization
-- Weight decay
+**Düzenlileştirme Teknikleri**:
+- Dropout katmanları
+- Batch normalizasyonu
+- Ağırlık azalması
 
-**Architecture Extensions**:
-- Convolutional layers
-- Recurrent connections
-- Attention mechanisms
+**Mimari Genişletmeleri**:
+- Konvolüsyonel katmanlar
+- Tekrarlayıcı bağlantılar
+- Dikkat mekanizmaları
 
-## 5. Conclusion
+## 5. Sonuç
 
-This study successfully implemented a neural network with forward and backward propagation algorithms from scratch, demonstrating solid understanding of the underlying mathematical principles. The implementation achieved competitive performance on both classification (87% accuracy) and regression (94.43% R²) tasks, validating the correctness of the algorithms.
+Bu çalışma, sıfırdan ileri ve geri yayılım algoritmaları ile bir sinir ağını başarıyla uygulamış, altta yatan matematiksel ilkelerin sağlam anlaşıldığını göstermiştir. Uygulama hem sınıflandırma (%87 doğruluk) hem de regresyon (%94.43 R²) görevlerinde rekabetçi performans elde etmiş, algoritmaların doğruluğunu doğrulamıştır.
 
-**Key Contributions**:
-1. Complete implementation of forward/backward propagation
-2. Support for multiple activation functions and loss functions
-3. Efficient mini-batch gradient descent optimization
-4. Experimental validation on synthetic datasets
-5. Comprehensive performance analysis and visualization
+**Ana Katkılar**:
+1. İleri/geri yayılımın tam uygulaması
+2. Çoklu aktivasyon fonksiyonları ve kayıp fonksiyonları desteği
+3. Verimli mini-batch gradyan inişi optimizasyonu
+4. Sentetik veri kümelerinde deneysel doğrulama
+5. Kapsamlı performans analizi ve görselleştirme
 
-**Educational Value**:
-The implementation provides clear insights into neural network training dynamics, gradient computation, and optimization processes. The modular design facilitates understanding of individual components and their interactions.
+**Eğitim Değeri**:
+Uygulama, sinir ağı eğitim dinamikleri, gradyan hesaplaması ve optimizasyon süreçleri hakkında net içgörüler sağlar. Modüler tasarım, bireysel bileşenlerin ve etkileşimlerinin anlaşılmasını kolaylaştırır.
 
-**Performance Summary**:
-- Binary classification: 87% test accuracy
-- Regression: 94.43% variance explained (R²)
-- Stable convergence without overfitting
-- Efficient computational performance
+**Performans Özeti**:
+- İkili sınıflandırma: %87 test doğruluğu
+- Regresyon: %94.43 varyans açıklandı (R²)
+- Aşırı öğrenme olmadan kararlı yakınsama
+- Verimli hesaplama performansı
 
-The results demonstrate that fundamental neural network algorithms, when properly implemented, can achieve strong performance on standard machine learning tasks. This work provides a solid foundation for understanding more advanced neural network architectures and training techniques.
+Sonuçlar, temel sinir ağı algoritmalarının düzgün uygulandığında standart makine öğrenmesi görevlerinde güçlü performans elde edebileceğini göstermektedir. Bu çalışma, daha gelişmiş sinir ağı mimarileri ve eğitim tekniklerini anlamak için sağlam bir temel sağlar.
 
-## References
+## Kaynaklar
 
 1. Goodfellow, I., Bengio, Y., & Courville, A. (2016). *Deep Learning*. MIT Press.
 2. Nielsen, M. (2015). *Neural Networks and Deep Learning*. Determination Press.
@@ -296,7 +296,7 @@ The results demonstrate that fundamental neural network algorithms, when properl
 
 ---
 
-**Author**: Ural Altan Bozkurt  
-**Course**: YZM212 Machine Learning  
-**Date**: May 31, 2025  
-**Institution**: Ankara Üniversitesi
+**Yazar**: Ural Altan Bozkurt  
+**Ders**: YZM212 Makine Öğrenmesi  
+**Tarih**: 31 Mayıs 2025  
+**Kurum**: Ankara Üniversitesi
